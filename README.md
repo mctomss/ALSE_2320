@@ -1,2 +1,2 @@
 # ALSE_2320
-This repository is used to develop skill in my students.
+Repositorio que contiene los ejemplos, ejercicios y problemas de clase de Algoritmos en Sistemas Electrónicos.
