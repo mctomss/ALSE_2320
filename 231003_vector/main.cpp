@@ -51,8 +51,10 @@ int main(int argc, char** argv){
     }
   }
  
-  std::cout << "Los dos puntos más cercanos a ( " << test.X() << ", " << test.Y();
+/*  std::cout << "Los dos puntos más cercanos a ( " << test.X() << ", " << test.Y();
   std::cout << " ) son:" << std::endl;
+*/
+  std::cout << "Los dos puntos más cercanos a " << test << " son:" << std::endl;
   std::cout << vecPuntos[indx1] << std::endl;
   std::cout << vecPuntos[indx2] << std::endl;
   return 0;
