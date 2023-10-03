@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
 #include <fstream>
 #include "punto.h"
 #include <iostream>
@@ -15,24 +12,24 @@ int main(int argc, char** argv){
   }
 
   std::cout << "Se abrirá el archivo: " << argv[1] << std::endl;
-  char buff[255];
+  //char buff[255];
   // Crear el punto de test llamando el construtor por parámetros
   Punto test( strtod( argv[2], NULL ), strtod( argv[3], NULL ) );
   // voy a crear un vector de puntos  
   std::vector<Punto> vecPuntos;
   Punto tmp;   // tmp se contruye con el constructor por omisión
   int i = 0;
-  FILE * archivo = fopen( argv[1], "r" );
-  while ( fgets(buff, 255, (FILE*) archivo )){
-    if( i%2 == 0 )
-      tmp.X( strtod( buff, NULL ) );
-    else
-      tmp.Y( strtod( buff, NULL ) );
-
-    i++;
-    vecPuntos.push_back( tmp );
+  //FILE * archivo = fopen( argv[1], "r" );
+  std::ifstream archivo( argv[1] );
+  double x, y;
+  if( archivo.is_open() ){
+    while ( archivo >> x >> y ){
+      tmp.X( x );
+      tmp.Y( y );
+      vecPuntos.push_back( tmp );
+    }
+    archivo.close();
   }
-  fclose( archivo );
 
   double dist,dist1, dist2;
   dist1 = dist2 = 1000000000.;
@@ -41,13 +38,17 @@ int main(int argc, char** argv){
 
   for( i = 0; i < vecPuntos.size(); i++){
     //std::cout << "( " << vecPuntos[i].X() << ", " << vecPuntos[i].Y() << " )" << std::endl;
-    std::cout << vecPuntos[i] << std::endl;
+    std::cout << vecPuntos[i] ;
     dist = test.distancia ( vecPuntos[i] ); 
+    std::cout << ", distancia= " << dist << std::endl;
     if( dist < dist1 ){
       dist2 = dist1;
       indx2 = indx1;
       dist1 = dist;
       indx1 = i;
+    }else if( dist < dist2 ){
+      dist2 = dist;
+      indx2 = i;
     }
   }
  
