@@ -1,40 +1,32 @@
-#include <iostream>
+
+#include <stdio.h>
 #include <math.h>
 #include <fstream>
+#include <complex>
 #include <string>
+#include <iostream>
 
 using namespace std;
 /*libreria para escribir entradas y salidad cin y cout*/
-struct complejos{
-  double real;
-  double imagi;
-};
 
-double norma_complejo(double re, double im){
-    return sqrt(pow(re,2)+pow(im,2));
-}
 
-double angulo_complejo(double re, double im){
-    return atan2(im,re);
-}
-
-bool ordenar (complejos c[], int& tam){
+bool ordenar ( complex <double> complejo[] , int& tam){
   bool flag;
   do{
     flag = false;
     for(int i=0;i < tam-1;i++){
-      if (angulo_complejo(c[i].real, c[i].imagi)>angulo_complejo(c[i+1].real, c[i+1].imagi)){
-        complejos aux=c[i];
-        c[i]=c[i+1];
-        c[i+1]=aux;
+      if (abs(complejo[i]) > arg(complejo[i])){
+        complex<double> aux = complejo[i];
+        complejo[i]=complejo[i+1];
+        complejo[i+1]=aux;
         flag = true;
       }
-      else if(angulo_complejo(c[i].real,c[i].imagi)==angulo_complejo(c[i+1].real, c[i+1].imagi))
+      else if(arg(complejo[i])==arg(complejo[i+1]))
       {
-        if (norma_complejo(c[i].real, c[i].imagi)>norma_complejo(c[i+1].real, c[i+1].imagi)){
-        complejos aux=c[i];
-        c[i]=c[i+1];
-        c[i+1]=aux;
+        if (abs(complejo[i])>abs(complejo[i+1])){
+        complex<double> aux = complejo[i];
+        complejo[i]=complejo[i+1];
+        complejo[i+1]=aux;
         flag = true;
       }
       }
@@ -44,6 +36,7 @@ bool ordenar (complejos c[], int& tam){
 }
 
 int main(int argc, char** argv){
+   
 
     if( argc < 2){
     printf("Debe pasar el path del archivo de los datos de entrada.\n");
@@ -56,7 +49,7 @@ int main(int argc, char** argv){
     while ( fgets(buff, 255, (FILE*) archivo )){
         i++;
     }
-    complejos vec[i/2];
+    complex<double> complejo[i];
 
     i=0;
     int num=0;
@@ -64,9 +57,9 @@ int main(int argc, char** argv){
     archivo = fopen( argv[1], "r" );
     while ( fgets(buff, 255, (FILE*) archivo )){
         if (i%2==0){
-            vec[num].real=strtod(buff,NULL);
+            complejo[num].real(strtod(buff,NULL));
         }else {
-            vec[num].imagi=strtod(buff,NULL);
+            complejo[num].imag(strtod(buff,NULL));
             num++;
         }
         i++;
@@ -74,19 +67,19 @@ int main(int argc, char** argv){
     double reprom=0;
     double improm=0;
     for (int j=0;j<num;j++){
-        cout<<"El complejo "<<j+1<<" es: "<<vec[j].real<<"+j"<<vec[j].imagi;
-        cout<<" | Su Norma es: "<<norma_complejo(vec[j].real,vec[j].imagi);
-        cout<<" | Su ángulo es (en rad): "<<angulo_complejo(vec[j].real,vec[j].imagi)<<endl;
-        reprom+=vec[j].real;
-        improm+=vec[j].imagi;
+        cout<<"El complejo "<<j+1<<" es: "<<complejo[num];
+        cout<<" | Su Norma es: "<<abs (complejo[j]);
+        cout<<" | Su ángulo es (en rad): "<<arg (complejo[j])<<endl;
+        reprom+=complejo[j].real();
+        improm+=complejo[j].imag();
     }
     cout<<"El promedio de los números complejos es: "<<reprom/num<<improm/num<<"j"<<endl;
 
-    bool flag = ordenar(vec,num);
+    bool flag = ordenar(complejo,num);
     if (flag == true){
       cout << "Los numeros complejos en orden son:"<<endl;
       for (int j=0;j<num;j++){
-        cout<<vec[j].real<<"+j"<<vec[j].imagi<<endl;   
+        cout<<complejo[j]<<endl;   
       }
     }else{
       cout<<"error"<<endl;
@@ -94,3 +87,4 @@ int main(int argc, char** argv){
   }
   return 0;
 }
+

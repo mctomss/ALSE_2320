@@ -4,7 +4,7 @@
 #include <string>
 
 using namespace std;
-/*libreria para escribir entradas y salidad cin y cout*/
+
 struct complejos{
   double real;
   double imagi;
@@ -80,7 +80,7 @@ int main(int argc, char** argv){
         reprom+=vec[j].real;
         improm+=vec[j].imagi;
     }
-    cout<<"El promedio de los números complejos es: "<<reprom/num<<improm/num<<"j"<<endl;
+    cout<<"El promedio de los números complejos es: "<<reprom/num<<"+j"<<improm/num<<endl;
 
     bool flag = ordenar(vec,num);
     if (flag == true){
