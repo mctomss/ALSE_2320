@@ -16,6 +16,20 @@ double Punto::distancia(Punto &b){ //Calcula la distancia a otro
   return sqrt((b._x - _x)*(b._x - _x) + (b._y - _y)*(b._y - _y));
 }
 
+Punto Punto::operator+(const Punto &b)const{
+  Punto tmp;
+  tmp._x=_x + b._x;
+  tmp._y=_y + b._y;
+  return tmp;
+}
+
+Punto Punto::operator/(const double &b)const{
+  Punto tmp;
+  tmp._x= _x/b;
+  tmp._y= _y/b;
+  return tmp;
+}
+
 double Punto::X(){ 
   return _x;
 }

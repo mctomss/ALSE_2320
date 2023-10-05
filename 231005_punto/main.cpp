@@ -5,7 +5,7 @@
 
 
 int main(int argc, char** argv){
-  if( argc < 2){
+  if( argc < 4){
     std::cout << "Debe pasar el path del archivo de los datos de entrada ";
     std::cout << "junto con las coordenadas de consulta.\n" << std::endl;
     return 1;
@@ -35,7 +35,7 @@ int main(int argc, char** argv){
   dist1 = dist2 = 1000000000.;
   int indx1, indx2;
   indx1 = indx2 = 0;
-
+  Punto centroide(0.0,0.0); 
   for( i = 0; i < vecPuntos.size(); i++){
     //std::cout << "( " << vecPuntos[i].X() << ", " << vecPuntos[i].Y() << " )" << std::endl;
     std::cout << vecPuntos[i] ;
@@ -50,12 +50,13 @@ int main(int argc, char** argv){
       dist2 = dist;
       indx2 = i;
     }
+    centroide = centroide + vecPuntos[i];
   }
  
   std::cout << "Los dos puntos más cercanos a " << test << " son:" << std::endl;
   std::cout << vecPuntos[indx1] << std::endl;
   std::cout << vecPuntos[indx2] << std::endl;
-
+  std::cout << "El centroide se encuentra en"<<centroide/vecPuntos.size()<< std::endl; 
   /* A continuación deben calcular el centroide de los puntos cargados y calcular
      la distacia del punto de test a ese centroide.
      Para ello deben implementar la sobrecarga del operador de suma y del 

@@ -12,4 +12,6 @@ public:
   void X(const double &x);
   void Y(const double &y);
   friend std::ostream& operator<<(std::ostream &out, const Punto &p);
+  Punto operator+(const Punto &b)const;
+  Punto operator/(const double &b)const;
 };
