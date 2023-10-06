@@ -35,7 +35,8 @@ int main(int argc, char** argv){
   dist1 = dist2 = 1000000000.;
   int indx1, indx2;
   indx1 = indx2 = 0;
-  Punto centroide(0.0,0.0); 
+  Punto centroide(0.0,0.0);
+  double radio;
   for( i = 0; i < vecPuntos.size(); i++){
     //std::cout << "( " << vecPuntos[i].X() << ", " << vecPuntos[i].Y() << " )" << std::endl;
     std::cout << vecPuntos[i] ;
@@ -50,18 +51,21 @@ int main(int argc, char** argv){
       dist2 = dist;
       indx2 = i;
     }
-    centroide = centroide + vecPuntos[i];
+    centroide += vecPuntos[i];
   }
- 
+  centroide /= vecPuntos.size();
+  radio = test.distancia(centroide);
   std::cout << "Los dos puntos más cercanos a " << test << " son:" << std::endl;
   std::cout << vecPuntos[indx1] << std::endl;
   std::cout << vecPuntos[indx2] << std::endl;
-  std::cout << "El centroide se encuentra en"<<centroide/vecPuntos.size()<< std::endl; 
-  /* A continuación deben calcular el centroide de los puntos cargados y calcular
-     la distacia del punto de test a ese centroide.
-     Para ello deben implementar la sobrecarga del operador de suma y del 
-     operador división por un escalar.
-  */
-
+  std::cout << "El centroide se encuentra en"<<centroide<< std::endl; 
+  std::cout << "La distancia entre el centroide y el punto es: "<<radio<< std:: endl;
+  std::cout << "Los puntos dentro de la circunferencia son: "<< std:: endl;
+  for( i = 0; i < vecPuntos.size(); i++){
+    if (radio >= centroide.distancia ( vecPuntos[i] )){
+      std::cout << vecPuntos[i] << std::endl;
+    }
+        
+  }
   return 0;
 }
